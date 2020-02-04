@@ -10,6 +10,8 @@ body {
     background-color: #201e25 !important;
 }
 
+/* HEADER */
+
 .header {
     display: flex;
     flex-direction: row;
@@ -29,6 +31,8 @@ body {
     color: white;
 }
 
+/* HEADER END */
+
 .cardsTitles {
     opacity: 60%;
 }
@@ -40,20 +44,6 @@ body {
 .movieTitle {
     font-weight: 800;
 }
-
-.likeIco {
-    margin-left: 0.5em;
-}
-
-.likeIco:hover {
-    color: #d63232;
-    cursor: pointer;
-}
-
-.ratingStars:hover {
-    color: #FFD700;
-}
-
 
 
 

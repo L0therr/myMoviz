@@ -5,9 +5,6 @@ import './Fonts.css';
 import HeaderBtn from './components/headerBtn';
 import MovieTiles from './components/moviesTiles';
 import Footer from './components/footer';
-//svg
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 var movies = [
   {
@@ -15,76 +12,58 @@ var movies = [
     description: "AAAAAAAAAAAAAAAAAAAAAAAAA",
     img: "../frozen.jpg",
     globalRating: 1,
-    globalCountRating: 10,
+    globalCountRating: 100,
   },
   {
     name: "Jumanji",
     description: "AAAAAAAAAAAAAAAAAAAAAAAAA",
     img: "../jumanji.jpg",
     globalRating: 2,
-    globalCountRating: 10,
+    globalCountRating: 2,
   },
   {
     name: "Star Wars",
     description: "AAAAAAAAAAAAAAAAAAAAAAAAA",
     img: "../starwars.jpg",
     globalRating: 3,
-    globalCountRating: 10,
+    globalCountRating: 1000,
   },
   {
     name: "Maleficent",
     description: "AAAAAAAAAAAAAAAAAAAAAAAAA",
     img: "../maleficent.jpg",
     globalRating: 3,
-    globalCountRating: 10,
+    globalCountRating: 78,
   },
   {
     name: "Once Upon A Time In HollyWood",
     description: "AAAAAAAAAAAAAAAAAAAAAAAAA",
     img: "../once_upon.jpg",
     globalRating: 5,
-    globalCountRating: 10,
+    globalCountRating: 0,
   },
   {
     name: "Bad boyzz",
     description: "AAAAAAAAAAAAAAAAAAAAAAAAA",
     img: "../badboy3.jpg",
     globalRating: 3,
-    globalCountRating: 10,
+    globalCountRating: 100000000,
   },
   {
     name: "Terminator",
     description: "AAAAAAAAAAAAAAAAAAAAAAAAA",
     img: "../terminator.jpg",
     globalRating: 3,
-    globalCountRating: 10,
+    globalCountRating: 99,
   },
 ];
 
 function App(props) {
 
-  var starsDisplay = (starsNb) => {
-    var toDis = [];
-    for(var i=0;i<=5;i++){
-      if(i<starsNb)
-        toDis.push(<FontAwesomeIcon icon={faStar} style={{color: "#FFD700"}} />)
-      else toDis.push(<FontAwesomeIcon icon={faStar} />)
-    }
-    return toDis;
-  }
-
-  var ratingDisplay = () => {
-    var toDis = [];
-    for(var i=0;i<=5;i++){
-        toDis.push(<FontAwesomeIcon data-pos={i} className="ratingStars" icon={faStar} />)
-    }
-    return toDis;
-  }
-
   // <FontAwesomeIcon icon={faHeart} />
 
   //dinamize movies
-  var moviesDis = movies.map(function(movie, i) {return <MovieTiles userRating={ratingDisplay()} globalCountRating={movie.globalCountRating} globalRating={starsDisplay(movie.globalRating)} movieName={movie.name} movieImg={movie.img} movieText={movie.description} />});
+  var moviesDis = movies.map(function(movie, i) {return <MovieTiles globalCountRating={movie.globalCountRating} globalRating={movie.globalRating} movieName={movie.name} movieImg={movie.img} movieText={movie.description} />});
 
   return (
     <div className="all">
