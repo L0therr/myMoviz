@@ -21,6 +21,7 @@ body {
     margin-bottom: 2em;
     padding: 1em;
     top: 0;
+    overflow: hidden;
 }
 
 .headerItem {
@@ -81,6 +82,51 @@ body {
 /* WISHLIST END */
 /* HEADER END */
 
+/* MOVIE CARD */
+
+.cardInput {
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+    padding: 0.5em;
+    border-bottom: #e0e0e0 1px solid;
+}
+
+.cardPictoDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+}
+
+.separate {
+    width: 1px;
+    background-color: #e0e0e0;
+}
+
+
+.cardDataBody {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cardTitlesDiv {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.cardsDataDiv {
+    line-height: 175%;
+    display: flex;
+    flex-direction: column;
+}
+
 .cardsTitles {
     opacity: 60%;
 }
@@ -96,6 +142,8 @@ body {
 .heart:hover{
     cursor: pointer;
 }
+
+/* MOVIE CARD END */
 
 
 

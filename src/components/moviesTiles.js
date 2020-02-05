@@ -73,20 +73,32 @@ const Example = (props) => {
   return (
     <div className="col-12 col-md-6 col-lg-4 moviesDiv">
           <Card>
-          <div>
+          <div className="cardImgDiv">
             <CardImg top width="100%" src={props.movieImg} alt="Card image cap" />
+            <div className="cardInput">
+              <div className="cardPictoDiv">
+                <FontAwesomeIcon className="heart" onClick={()=>{handleLike()}} style={likeColor} icon={faHeart} />
+              </div>
+              <div className="cardPictoDiv separate"></div>
+              <div className="cardPictoDiv">
+                <FontAwesomeIcon onClick={()=>{handleWatch()}} style={cameraColor} icon={faVideo} /> ({watchCount})
+              </div>
+            </div>
           </div>
           <CardBody className="cardDiv">
             <CardTitle className="movieTitle">{props.movieName}</CardTitle>
             <CardText>{props.movieText}</CardText>
-
-            <CardTitle><span className="cardsTitles">Likes</span><FontAwesomeIcon className="heart" onClick={()=>{handleLike()}} style={likeColor} icon={faHeart} /></CardTitle>
-
-            <CardTitle><span className="cardsTitles">Nombres de vues</span> <FontAwesomeIcon onClick={()=>{handleWatch()}} style={cameraColor} icon={faVideo} />({watchCount})</CardTitle>
-
-            <CardTitle><span className="cardsTitles">Your rate</span> {userDis}</CardTitle>
-
-            <CardTitle><span className="cardsTitles">All users rate</span> {toDis} ({props.globalCountRating})</CardTitle>
+            <div className="cardDataBody">
+              <div className="cardTitlesDiv">
+                <span className="cardsTitles">Your rate</span>
+                <span className="cardsTitles">All users rate</span>
+              </div>
+              <div className="cardsDataDiv">
+                
+                <div>{userDis}</div>
+                <div>{toDis} ({props.globalCountRating})</div>
+              </div>
+            </div>
 
           </CardBody>
         </Card>
