@@ -1,10 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import './Fonts.css';
 //component
-import HeaderBtn from './components/headerBtn';
+import WishList from './components/wishList';
 import MovieTiles from './components/moviesTiles';
 import Footer from './components/footer';
+
+//reactstraps
+import { Button, Popover, PopoverHeader, PopoverBody, ListGroup  } from 'reactstrap';
+
+//fontawesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+
+
 
 var movies = [
   {
@@ -59,23 +68,46 @@ var movies = [
 ];
 
 function App(props) {
+  //POPHOVER
+  const [popoverOpen, setPopoverOpen] = useState(false);
+  const toggle = () => setPopoverOpen(!popoverOpen);
+  //POPHOVER
 
-  // <FontAwesomeIcon icon={faHeart} />
 
-  //dinamize movies
-  var moviesDis = movies.map(function(movie, i) {return <MovieTiles globalCountRating={movie.globalCountRating} globalRating={movie.globalRating} movieName={movie.name} movieImg={movie.img} movieText={movie.description} />});
+  const [likesCnt, setLikesCnt] = useState(0);
+  const [wishList, setWishList] = useState([]);
 
+  const addMovie = (pos) => {
+    setLikesCnt(likesCnt+1);
+    setWishList([...wishList, movies[pos]])
+  }
+  const suppMovie = (name) => {
+    setLikesCnt(likesCnt-1);
+    setWishList( wishList.filter((e)=>(e.name  !== name)));
+  }
+
+  var moviesDis = movies.map(function(movie, i) {return <MovieTiles pos={i} likeBtnRemove={suppMovie} likeBtnAdd={addMovie} globalCountRating={movie.globalCountRating} globalRating={movie.globalRating} movieName={movie.name} movieImg={movie.img} movieText={movie.description} />});
+  var wishListDis = wishList.map(function(wishList, i) {return <WishList name={movies.name} removeFromWishList={suppMovie} movieImg={wishList.img} movieTitle={wishList.name} />});
+  
   return (
-    <div className="all">
+    <div id="all" className="all">
       <div className="container">
         <div className="row">
           <div className="col-12 header">
             <div>
-              <img className="headerItem" alt="logo.png" src="/logo.png" />
+              <a href="#all"><img className="headerItem" alt="logo.png" src="/logo.png" /></a>
               <span className="headerItem headerTxt">Last released</span>
             </div>
-            <div className="headerItem" >
-            < HeaderBtn/>
+            <div className="headerItem">
+            <Button id="Popover1" type="button">{likesCnt} <FontAwesomeIcon style={{color: "#fd6861"}} icon={faHeart} /></Button>
+              <Popover placement="bottom" isOpen={popoverOpen} target="Popover1" toggle={toggle}>
+                <PopoverHeader>Liked Movies</PopoverHeader>
+                <PopoverBody>
+                <ListGroup>
+                  {wishListDis}
+                </ListGroup>
+                </PopoverBody>
+              </Popover>
             </div>
           </div>
         </div>

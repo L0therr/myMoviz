@@ -32,6 +32,7 @@ const Example = (props) => {
 
   
   var handleLike = () => {
+    if(likeMovie === false) {props.likeBtnAdd(props.pos);} else {props.likeBtnRemove(props.movieName)};
     likeMovie ? setLikeMovie(false) : setLikeMovie(true);
   }
 
@@ -81,7 +82,7 @@ const Example = (props) => {
             <CardTitle className="movieTitle">{props.movieName}</CardTitle>
             <CardText>{props.movieText}</CardText>
 
-            <CardTitle><span className="cardsTitles">Likes</span><FontAwesomeIcon onClick={()=>{handleLike()}} style={likeColor} icon={faHeart} /></CardTitle>
+            <CardTitle><span className="cardsTitles">Likes</span><FontAwesomeIcon className="heart" onClick={()=>{handleLike()}} style={likeColor} icon={faHeart} /></CardTitle>
 
             <CardTitle><span className="cardsTitles">Nombres de vues</span> <FontAwesomeIcon onClick={()=>{handleWatch()}} style={cameraColor} icon={faVideo} />({watchCount})</CardTitle>
 
