@@ -13,8 +13,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 
 const Example = (props) => {
-
-  const [likeMovie, setLikeMovie] = useState(false);
+  
   const [watchMovie, setWatchMovie] = useState(false);
   const [watchCount, setWatchCount] = useState(0);
   const [userRating, setUserRating] = useState(0);
@@ -32,12 +31,11 @@ const Example = (props) => {
 
   
   var handleLike = () => {
-    if(likeMovie === false) {props.likeBtnAdd(props.pos);} else {props.likeBtnRemove(props.movieName)};
-    likeMovie ? setLikeMovie(false) : setLikeMovie(true);
+    if(props.isLiked === false) {props.likeBtnAdd(props.pos);} else {props.likeBtnRemove(props.movieName)};
   }
 
   var likeColor;
-  if(likeMovie === true) {
+  if(props.isLiked === true) {
     likeColor = { color: "#fd6861" };
   }
   //handle end

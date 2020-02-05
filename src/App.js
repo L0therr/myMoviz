@@ -76,18 +76,31 @@ function App(props) {
 
   const [likesCnt, setLikesCnt] = useState(0);
   const [wishList, setWishList] = useState([]);
+  const [likeMovie, setLikeMovie] = useState(false);
 
   const addMovie = (pos) => {
     setLikesCnt(likesCnt+1);
+    setLikeMovie(true);
     setWishList([...wishList, movies[pos]])
   }
   const suppMovie = (name) => {
     setLikesCnt(likesCnt-1);
-    setWishList( wishList.filter((e)=>(e.name  !== name)));
+    setLikeMovie(false);
+    setWishList( wishList.filter((e)=>(e.name !== name)));
   }
 
-  var moviesDis = movies.map(function(movie, i) {return <MovieTiles pos={i} likeBtnRemove={suppMovie} likeBtnAdd={addMovie} globalCountRating={movie.globalCountRating} globalRating={movie.globalRating} movieName={movie.name} movieImg={movie.img} movieText={movie.description} />});
-  var wishListDis = wishList.map(function(wishList, i) {return <WishList name={movies.name} removeFromWishList={suppMovie} movieImg={wishList.img} movieTitle={wishList.name} />});
+  const wishRmv = (pos) => {
+    setLikesCnt(likesCnt-1);
+    setLikeMovie(false);
+    setWishList( wishList.filter((e)=>(wishList.indexOf(e) !== pos)));
+  }
+
+  var moviesDis = movies.map(function(movie, i) {
+    var isLiked;
+    wishList.find((e)=>(e.name === movie.name)) ? isLiked = true : isLiked = false;
+    return <MovieTiles pos={i} setIsLiked={setLikeMovie} isLiked={isLiked} likeBtnRemove={suppMovie} likeBtnAdd={addMovie} globalCountRating={movie.globalCountRating} globalRating={movie.globalRating} movieName={movie.name} movieImg={movie.img} movieText={movie.description} />
+  });
+  var wishListDis = wishList.map(function(wishList, i) {return <WishList wishRmv={wishRmv} wishPos={i} name={movies.name} removeFromWishList={suppMovie} movieImg={wishList.img} movieTitle={wishList.name} />});
   
   return (
     <div id="all" className="all">

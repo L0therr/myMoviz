@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Example = (props) => {
+const Example = (props) => {  
   return (
-    <div className="wishDiv">
+    <div className="wishDiv" onClick={()=>{{props.wishRmv(props.wishPos)}}}>
       <div className="wishTxtImgDiv">
         <span>{props.movieTitle}</span>
         <img className="wishImg" alt="movie pic" src={props.movieImg}  />
