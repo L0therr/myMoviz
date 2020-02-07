@@ -6,19 +6,11 @@ var request = require('sync-request');
 var connect = require('../models/connect');
 var moviesModel = require('../models/movies');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.json({ message: 'reponse en JSON' });
-});
-
 router.get('/new-movies', function(req, res, next) {
-  var apiData = request('GET', 'https://api.themoviedb.org/3/discover/movie?api_key=412c1c31414bcde35e99edabce98254c&language=fr&sort_by=popularity.desc&include_adult=false&include_video=false&page=10');
+  var apiData = request('GET', 'https://api.themoviedb.org/3/discover/movie?api_key=412c1c31414bcde35e99edabce98254c&language=fr&sort_by=popularity.desc&include_adult=false&include_video=false&page=1');
   apiData = JSON.parse(apiData.getBody());
-  res.json({result: true,movies:apiData});
+  res.json({result: true, movies:apiData.results});
 });
-
-
-
 
 //WISHLIST
 
@@ -30,8 +22,8 @@ router.get('/wishlist-movie', async function(req, res, next) {
 
 //add to wishlist
 router.post('/wishlist-movie', async function(req, res, next) {
-  var movieName = req.body.movieName;
-  var moviePic = req.body.moviePic;
+  var movieName = req.body.name;
+  var moviePic = req.body.pic;
 
   var isExist = await moviesModel.findOne({
     name: movieName,
@@ -45,15 +37,13 @@ router.post('/wishlist-movie', async function(req, res, next) {
     await newMovie.save();
     res.json({result:true, pushedName: req.body.movieName, pushedPic: req.body.moviePic});
   } else {
-    console.log('ALREADY EXIT')
     res.json({result:false});
   }  
 });
 
 //remove from wishlist
 router.delete('/wishlist-movie', async function(req, res, next) {
-
-  var toDelete = req.body.movieName;
+  var toDelete = req.body.name;
   var isExist = await moviesModel.findOne({
     name: toDelete,
   });

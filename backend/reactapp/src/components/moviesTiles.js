@@ -31,11 +31,13 @@ const Example = (props) => {
 
   
   var handleLike = () => {
-    if(props.isLiked === false) {props.likeBtnAdd(props.pos);} else {props.likeBtnRemove(props.movieName)};
+    console.log(props.LIKE)
+    if(props.LIKE === false) {props.likeBtnAdd(props.movieName, props.movieImg)} else {props.likeBtnRemove(props.movieName)};
+   
   }
 
   var likeColor;
-  if(props.isLiked === true) {
+  if(props.LIKE === true) {
     likeColor = { color: "#fd6861" };
   }
   //handle end
