@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import './Fonts.css';
 //component
@@ -68,6 +68,23 @@ var movies = [
 ];
 
 function App(props) {
+
+  useEffect(() => {
+    var fetchData = async () => {
+      var rawRes = await fetch('/');
+      console.log(rawRes);
+    }
+    fetchData();
+  }, []);
+
+
+
+
+
+
+
+
+
   //POPHOVER
   const [popoverOpen, setPopoverOpen] = useState(false);
   const toggle = () => setPopoverOpen(!popoverOpen);
